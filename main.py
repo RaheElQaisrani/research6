@@ -54,7 +54,7 @@ def _consumption_chart(df_allocation, classification, consumption, method, metri
 
 
 def _generate_initial_allocations(initial_allocation_path, nodes_size, requests_size):
-    number_of_initial_allocations = 500
+    number_of_initial_allocations = 5
 
     allocations = []
     for _ in range(number_of_initial_allocations):
@@ -104,7 +104,7 @@ def run_ga(n_nodes, test_samples, model_memory, model_cpu):
             memory_classification,
             cpu_classification,
             population
-        ).optimize(n_generations=30)
+        ).optimize(n_generations=3)
 
         ga_solution = pd.DataFrame(ga_solution)
 
@@ -135,7 +135,7 @@ def run_pso(n_nodes, test_samples, model_memory, model_cpu):
             memory_classification,
             cpu_classification,
             population
-        ).optimize(max_iter=30)
+        ).optimize(max_iter=3)
 
         pso_solution = pd.DataFrame(pso_solution)
 
@@ -212,7 +212,7 @@ if __name__ == '__main__':
     reader = DataReader()
     test_samples, model_memory, model_cpu = reader.read(Sample.DAS_2.value)
 
-    n_nodes_candi = [5, 10, 15]
+    n_nodes_candi = [5]
     for i, sample in enumerate(test_samples):
         sample.reset_index(inplace=True)
 
